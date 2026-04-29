@@ -6,7 +6,7 @@ import "@fontsource/oswald/700.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Jerry Robayo | Full Stack Developer",
+  title: "Jerry Robayo",
   description: "Portfolio landing page for Jerry Robayo, full stack developer.",
 };
 
