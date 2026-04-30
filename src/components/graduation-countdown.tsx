@@ -69,12 +69,12 @@ export function GraduationCountdown() {
       {values.map(([label, value]) => (
         <span
           key={label}
-          className="flex min-w-0 flex-col items-center justify-center border border-secondary/25 px-2 py-2 text-center"
+          className="flex min-w-0 flex-col items-center justify-center border border-secondary/25 px-3 py-3 text-center"
         >
-          <span className="block font-display text-lg leading-none text-foreground">
+          <span className="block font-display text-xl leading-none text-foreground">
             {value}
           </span>
-          <span className="mt-1 block w-full text-center font-display text-[10px] uppercase tracking-[0.14em] text-secondary">
+          <span className="mt-1.5 block w-full text-center font-display text-[10px] uppercase tracking-[0.14em] text-secondary">
             {label}
           </span>
         </span>

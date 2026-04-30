@@ -4,7 +4,7 @@ const menuItems = [
   { label: "Experience", href: "/experience" },
   { label: "Projects", href: "/projects" },
   { label: "Gallery", href: "/gallery" },
-  { label: "Contact", href: "mailto:jerryrobayo1130@gmail.com" },
+  { label: "Contact", href: "/contact" },
   { label: "Fun", href: "#fun" },
 ];
 
