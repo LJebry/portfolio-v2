@@ -24,9 +24,12 @@ const experiences = [
     title: "Full Stack Developer",
     pricePerHour: "Sports Excitement · Sports social platform",
     status: "Not Paid" as const,
-    categories: ["Next.js", "Tailwind CSS", "shadcn/ui", "Axios", "Zustand"],
-    description:
-      "Developed responsive dashboard and event page features, built a centralized TypeScript API client with JWT interceptors and standardized error handling, and implemented auth/profile state with Zustand plus Zod validation for multi-step forms.",
+    categories: ["TypeScript", "React", "Next.js", "Tailwind CSS", "shadcn/ui", "Axios", "Zustand", "REST APIs", "Prisma ORM", "PostgreSQL"],
+    description: [
+      "Built and shipped features using Next.js and TypeScript, creating responsive UI components with Tailwind CSS and shadcn/ui",
+      "Designed and integrated REST APIs with Prisma ORM and PostgreSQL, handling data modeling and backend communication",
+      "Implemented secure JWT authentication flows and improved state management using Zustand for scalable frontend architecture",
+    ],
     location: "Queens, NY",
     timeAgo: "Jun 2025 - Dec 2025",
     logoColor: "bg-background",
@@ -38,8 +41,11 @@ const experiences = [
     pricePerHour: "Unadat · Chores management system",
     status: "Not Paid" as const,
     categories: ["HTML", "CSS", "JavaScript", "PHP", "SQL"],
-    description:
-      "Maintained and enhanced a chores management system, improving task assignment workflows, resolving system issues, debugging code, and adding full-stack functionality to strengthen reliability and feature coverage.",
+    description: [
+      "Collaborated with development team to maintain and enhance the existing chores management system using HTML, CSS, JavaScript, PHP, and SQL, ensuring consistent functionality and resolving system issues to maintain optimal user experience.",
+      "Implemented feature improvements to the chores tracking system through frontend and backend development, enhancing task assignment workflows and improving system reliability for end users.",
+      "Contributed to system optimization by debugging code and adding new functionality to the chores platform, strengthening application performance and extending feature capabilities through full-stack development practices.",
+    ],
     location: "Remote, NY",
     timeAgo: "Jun 2025 - Aug 2025",
     logoColor: "bg-background",
@@ -51,8 +57,11 @@ const experiences = [
     pricePerHour: "Deo Mwano Consultancy · Calendar application",
     status: "Not Paid" as const,
     categories: ["HTML", "CSS", "JavaScript", "Ruby on Rails", "Git"],
-    description:
-      "Contributed to the development and launch of a calendar app, collaborated through Git and GitHub code review workflows, reduced deployment friction, and resolved reported issues quickly to improve reliability.",
+    description: [
+      "Contributed on developing and launch of a calendar application using HTML, CSS, JavaScript, and Ruby on Rails.",
+      "Collaborated with a team of developers, utilizing Git and GitHub for version control, resulting in a 30% reduction in deployment time and improved code quality through rigorous code reviews and unit testing.",
+      "Conducted thorough debugging and troubleshooting, resolving 95% of reported issues within 48 hours and improving overall system reliability by 50%.",
+    ],
     location: "Remote, NY",
     timeAgo: "Jun 2024 - Aug 2024",
     logoColor: "bg-background",

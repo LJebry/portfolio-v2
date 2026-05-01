@@ -10,7 +10,7 @@ interface Project {
   pricePerHour: string;
   status: "Paid" | "Not Paid";
   categories: string[];
-  description: string;
+  description: string | string[];
   location: string;
   timeAgo: string;
   logoColor: string;
@@ -222,12 +222,23 @@ function ProjectCard({ project }: { project: Project }) {
                     ))}
                   </motion.div>
 
-                  <motion.p
-                    className="mb-4 text-sm leading-7 text-secondary"
-                    variants={childVariants}
-                  >
-                    {project.description}
-                  </motion.p>
+                  {Array.isArray(project.description) ? (
+                    <motion.ul
+                      className="mb-4 list-disc space-y-2 pl-5 text-sm leading-7 text-secondary marker:text-accent"
+                      variants={childVariants}
+                    >
+                      {project.description.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </motion.ul>
+                  ) : (
+                    <motion.p
+                      className="mb-4 text-sm leading-7 text-secondary"
+                      variants={childVariants}
+                    >
+                      {project.description}
+                    </motion.p>
+                  )}
 
                   <motion.div
                     className="flex items-center gap-2 text-sm text-secondary"
