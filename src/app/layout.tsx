@@ -8,6 +8,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Jerry Robayo",
   description: "Portfolio landing page for Jerry Robayo, full stack developer.",
+  icons: {
+    icon: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
