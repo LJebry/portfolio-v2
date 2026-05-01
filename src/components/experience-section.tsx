@@ -16,7 +16,7 @@ const experiences = [
       "Expected May 2026. Coursework includes Web Applications, Multimedia Computing, Computer Architecture, Data Structures and Algorithms, Object Oriented Programming, Discrete Mathematics, and Introduction to C++.",
     location: "Brooklyn, NY",
     timeAgo: "Expected May 2026",
-    logoColor: "bg-surface",
+    logoColor: "bg-accent",
     logoIcon: "BC",
   },
   {
@@ -29,7 +29,7 @@ const experiences = [
       "Developed responsive dashboard and event page features, built a centralized TypeScript API client with JWT interceptors and standardized error handling, and implemented auth/profile state with Zustand plus Zod validation for multi-step forms.",
     location: "Queens, NY",
     timeAgo: "Jun 2025 - Dec 2025",
-    logoColor: "bg-accent",
+    logoColor: "bg-background",
     logoIcon: "SE",
   },
   {
@@ -42,7 +42,7 @@ const experiences = [
       "Maintained and enhanced a chores management system, improving task assignment workflows, resolving system issues, debugging code, and adding full-stack functionality to strengthen reliability and feature coverage.",
     location: "Remote, NY",
     timeAgo: "Jun 2025 - Aug 2025",
-    logoColor: "bg-accent",
+    logoColor: "bg-background",
     logoIcon: "U",
   },
   {
