@@ -7,15 +7,42 @@ const profile = [
   ["Seeking", "2026 new-grad software role"],
 ];
 
-const capabilities = [
-  "Next.js",
-  "TypeScript",
-  "React",
-  "Tailwind CSS",
-  "API design",
-  "SQL",
-  "PHP",
-  "Ruby on Rails",
+const skillGroups = [
+  {
+    label: "Languages",
+    items: ["JavaScript", "TypeScript", "C++", "SQL", "HTML", "CSS"],
+  },
+  {
+    label: "Frontend",
+    items: ["React", "Next.js", "Tailwind CSS", "shadcn/ui"],
+  },
+  {
+    label: "Backend",
+    items: ["Node.js", "Express", "REST APIs"],
+  },
+  {
+    label: "Tools & Tech",
+    items: [
+      "Git",
+      "GitHub",
+      "GitLab",
+      "Axios",
+      "JWT Auth",
+      "Zustand",
+      "Zod",
+      "Prisma ORM",
+      "PostgreSQL",
+    ],
+  },
+  {
+    label: "Other",
+    items: [
+      "Responsive Design",
+      "API Integration",
+      "Debugging",
+      "Agile Collaboration",
+    ],
+  },
 ];
 
 export function AboutSection() {
@@ -105,7 +132,7 @@ export function AboutSection() {
                   GitHub <ArrowUpRight className="h-4 w-4" />
                 </a>
                 <a
-                  href="https://linkedin.com/in/jerry-robayo/"
+                  href="https://www.linkedin.com/in/jerry-robayo"
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center gap-1 border-b border-secondary/35 transition-colors hover:border-accent hover:text-accent"
@@ -129,14 +156,17 @@ export function AboutSection() {
             <p className="font-display text-xs uppercase tracking-[0.22em] text-secondary/70">
               Skills
             </p>
-            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
-              {capabilities.map((item) => (
+            <div className="mt-4 grid gap-4">
+              {skillGroups.map((group) => (
                 <div
-                  key={item}
-                  className="border border-secondary/25 bg-background px-4 py-3"
+                  key={group.label}
+                  className="border border-secondary/25 bg-background px-4 py-4"
                 >
-                  <p className="font-display text-sm uppercase text-foreground">
-                    {item}
+                  <p className="font-display text-xs uppercase tracking-[0.18em] text-accent">
+                    {group.label}
+                  </p>
+                  <p className="mt-2 text-sm leading-6 text-foreground">
+                    {group.items.join(", ")}
                   </p>
                 </div>
               ))}

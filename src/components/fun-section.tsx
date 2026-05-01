@@ -20,8 +20,8 @@ export function FunSection() {
             Scrolling through resumes gets repetitive. Take a minute and try the daily Wordle.
           </p>
           <p className="mt-6 max-w-lg text-sm leading-7 text-secondary">
-            The guess check runs through a server route, so the answer stays off
-            your computer.
+            The guess check runs through a server route, and the answer is only
+            revealed after the last attempt.
           </p>
         </div>
 

@@ -24,11 +24,16 @@ const storyUsers: Array<{
         type: "image",
         src: "/gallery/wifey-nyc-upside-down.jpeg",
       },
+      {
+        id: "wifey-3",
+        type: "image",
+        src: "/gallery/portrait-stage.jpeg",
+      },
     ],
   },
   {
     username: "NYC",
-    avatar: "/gallery/wifey-nyc-theater.jpeg",
+    avatar: "/gallery/nyc-skyline.jpeg",
     timestamp: "2026-04-29T19:30:00-04:00",
     stories: [
       {
@@ -39,7 +44,22 @@ const storyUsers: Array<{
       {
         id: "nyc-2",
         type: "image",
-        src: "/gallery/portrait-stage.jpeg",
+        src: "/gallery/nyc-snowflake.jpeg",
+      },
+      {
+        id: "nyc-3",
+        type: "image",
+        src: "/gallery/nyc-grand-central.jpeg",
+      },
+      {
+        id: "nyc-4",
+        type: "image",
+        src: "/gallery/nyc-skyline.jpeg",
+      },
+      {
+        id: "nyc-5",
+        type: "image",
+        src: "/gallery/nyc-museum.jpeg",
       },
     ],
   },
@@ -52,11 +72,6 @@ const storyUsers: Array<{
         id: "portrait-1",
         type: "image",
         src: "/jerry-robayo-portrait-1821.jpeg",
-      },
-      {
-        id: "portrait-2",
-        type: "image",
-        src: "/gallery/portrait-stage.jpeg",
       },
     ],
   },
@@ -87,40 +102,72 @@ const mediaItems = [
     id: 2,
     type: "image" as const,
     title: "Wifey",
-    desc: "Subway ride, soft light, and a favorite person.",
+    desc: "Goofing around :D",
     url: "/gallery/wifey-nyc-subway.jpeg",
     span: "",
   },
   {
     id: 3,
     type: "image" as const,
-    title: "Tiny Dino",
-    desc: "A weird little NYC moment that deserved a frame.",
-    url: "/gallery/wifey-nyc-theater.jpeg",
+    title: "Wifey",
+    desc: "Movies Shenanigans",
+    url: "/gallery/wifey-nyc-upside-down.jpeg",
     span: "",
   },
   {
     id: 4,
     type: "image" as const,
-    title: "Portraits",
-    desc: "Backstage light and a good laugh.",
+    title: "Wifey",
+    desc: "Also goofing around :D",
     url: "/gallery/portrait-stage.jpeg",
     span: "",
   },
   {
     id: 5,
     type: "image" as const,
-    title: "My Cats",
-    desc: "Two tiny personalities holding court.",
-    url: "/gallery/my-cats.jpeg",
+    title: "NYC Snowflake",
+    desc: "Holiday light caught between city facades.",
+    url: "/gallery/nyc-snowflake.jpeg",
     span: "",
   },
   {
     id: 6,
     type: "image" as const,
-    title: "Wifey",
-    desc: "An upside-down frame from the everyday archive.",
-    url: "/gallery/wifey-nyc-upside-down.jpeg",
+    title: "Grand Central",
+    desc: "A station frame from a New York walk.",
+    url: "/gallery/nyc-grand-central.jpeg",
+    span: "",
+  },
+  {
+    id: 7,
+    type: "image" as const,
+    title: "Staten Island Ferry View",
+    desc: "Golden hour over the water.",
+    url: "/gallery/nyc-skyline.jpeg",
+    span: "",
+  },
+  {
+    id: 8,
+    type: "image" as const,
+    title: "Met Museum",
+    desc: "Took this one for an art assignment",
+    url: "/gallery/nyc-museum.jpeg",
+    span: "",
+  },
+  {
+    id: 9,
+    type: "image" as const,
+    title: "Tiny Dino",
+    desc: "Burnt an año viejo. A New Year’s tradition where you burn an effigy to leave the old year behind. This one was a tiny dinosaur.",
+    url: "/gallery/wifey-nyc-theater.jpeg",
+    span: "",
+  },
+  {
+    id: 10,
+    type: "image" as const,
+    title: "My Cats",
+    desc: "They dont seem to like eachother much but they sure are cute.",
+    url: "/gallery/my-cats.jpeg",
     span: "",
   },
 ];
@@ -142,8 +189,8 @@ export function GallerySection() {
             <span className="block text-accent">Shots.</span>
           </h1>
           <p className="mt-8 max-w-xl text-xl leading-9 text-secondary sm:text-2xl sm:leading-10">
-            A visual shelf for portraits, Wifey, NYC moments, my cats, and the
-            small details around the portfolio.
+            A visual shelf for portraits, Wifey, New York City, my cats, and
+            the small details around the portfolio.
           </p>
         </div>
 

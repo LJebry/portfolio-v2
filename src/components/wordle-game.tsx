@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useMemo, useRef, useState } from "react";
+import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import Toaster, { type ToasterRef } from "@/components/ui/toast";
 
 type LetterStatus = "empty" | "absent" | "present" | "correct";
@@ -25,6 +25,11 @@ type ApiResponse = {
   error?: string;
 };
 
+type AnswerResponse = {
+  answer?: string;
+  error?: string;
+};
+
 const maxAttempts = 6;
 const wordLength = 5;
 const keyboardRows = ["qwertyuiop", "asdfghjkl", "zxcvbnm"];
@@ -34,6 +39,23 @@ const statusRank: Record<LetterStatus, number> = {
   present: 2,
   correct: 3,
 };
+
+function getNextWordCountdown() {
+  const now = new Date();
+  const nextUtcMidnight = Date.UTC(
+    now.getUTCFullYear(),
+    now.getUTCMonth(),
+    now.getUTCDate() + 1,
+  );
+  const diff = Math.max(0, nextUtcMidnight - now.getTime());
+  const hours = Math.floor(diff / (1000 * 60 * 60));
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  return [hours, minutes, seconds]
+    .map((value) => value.toString().padStart(2, "0"))
+    .join(":");
+}
 
 function getStatuses(response: ApiResponse): LetterStatus[] {
   if (response.was_correct) {
@@ -83,10 +105,20 @@ export function WordleGame() {
     "Guess today's five-letter word in six tries.",
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [nextWordCountdown, setNextWordCountdown] = useState("");
   const hasWon = rows.some((row) =>
     row.statuses.every((status) => status === "correct"),
   );
   const isComplete = hasWon || rows.length >= maxAttempts;
+
+  useEffect(() => {
+    const updateCountdown = () => setNextWordCountdown(getNextWordCountdown());
+
+    updateCountdown();
+    const intervalId = window.setInterval(updateCountdown, 1000);
+
+    return () => window.clearInterval(intervalId);
+  }, []);
 
   function notify({
     title,
@@ -160,6 +192,23 @@ export function WordleGame() {
     setGuess((currentGuess) => `${currentGuess}${letter}`.slice(0, wordLength));
   }
 
+  async function revealAnswer() {
+    try {
+      const response = await fetch("/api/wordle", {
+        method: "GET",
+      });
+      const result = (await response.json()) as AnswerResponse;
+
+      if (!response.ok || !result.answer) {
+        return "Out of guesses. Could not reveal today's word right now.";
+      }
+
+      return `Out of guesses. Today's word was ${result.answer.toUpperCase()}.`;
+    } catch {
+      return "Out of guesses. Could not reveal today's word right now.";
+    }
+  }
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -214,9 +263,10 @@ export function WordleGame() {
           variant: "success",
         });
       } else if (nextRows.length >= maxAttempts) {
+        const answerMessage = await revealAnswer();
         notify({
           title: "Game over",
-          nextMessage: "Out of guesses. Come back tomorrow for a new word.",
+          nextMessage: answerMessage,
           variant: "warning",
         });
       } else {
@@ -249,9 +299,17 @@ export function WordleGame() {
             Play Break
           </h2>
         </div>
-        <p className="text-sm text-secondary">
-          {rows.length}/{maxAttempts} attempts
-        </p>
+        <div className="text-left text-sm text-secondary sm:text-right">
+          <p>
+            {rows.length}/{maxAttempts} attempts
+          </p>
+          <p className="mt-1 font-display text-xs uppercase tracking-[0.16em] text-secondary/75">
+            Next word{" "}
+            <span className="text-foreground">
+              {nextWordCountdown || "--:--:--"}
+            </span>
+          </p>
+        </div>
       </div>
 
       <div className="mx-auto grid max-w-[240px] gap-1">

@@ -17,14 +17,17 @@ const MediaItem = ({
   item,
   className,
   onClick,
+  fit = "cover",
 }: {
   item: MediaItemType;
   className?: string;
   onClick?: () => void;
+  fit?: "cover" | "contain";
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isInView, setIsInView] = useState(false);
   const [isBuffering, setIsBuffering] = useState(true);
+  const objectFitClass = fit === "contain" ? "object-contain" : "object-cover";
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -89,7 +92,7 @@ const MediaItem = ({
       <div className={`${className} relative overflow-hidden`}>
         <video
           ref={videoRef}
-          className="h-full w-full object-cover"
+          className={`h-full w-full ${objectFitClass}`}
           onClick={onClick}
           playsInline
           muted
@@ -117,7 +120,7 @@ const MediaItem = ({
     <img
       src={item.url}
       alt={item.title}
-      className={`${className} cursor-pointer object-cover`}
+      className={`${className} cursor-pointer ${objectFitClass}`}
       onClick={onClick}
       loading="lazy"
       decoding="async"
@@ -158,7 +161,7 @@ const GalleryModal = ({
             <AnimatePresence mode="wait">
               <motion.div
                 key={selectedItem.id}
-                className="relative aspect-[16/9] h-auto max-h-[75vh] w-full max-w-4xl overflow-hidden border border-secondary/25 bg-surface shadow-2xl"
+                className="relative flex max-h-[82vh] w-fit max-w-[92vw] items-center justify-center overflow-hidden border border-secondary/25 bg-surface shadow-2xl"
                 initial={{ y: 20, scale: 0.97 }}
                 animate={{
                   y: 0,
@@ -175,8 +178,9 @@ const GalleryModal = ({
               >
                 <MediaItem
                   item={selectedItem}
-                  className="h-full w-full bg-background object-contain"
+                  className="h-auto max-h-[82vh] w-auto max-w-[92vw] bg-background"
                   onClick={onClose}
+                  fit="contain"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
                   <h3 className="font-display text-xl font-semibold uppercase text-white">
