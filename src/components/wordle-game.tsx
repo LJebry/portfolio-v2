@@ -27,6 +27,13 @@ type ApiResponse = {
 
 const maxAttempts = 6;
 const wordLength = 5;
+const keyboardRows = ["qwertyuiop", "asdfghjkl", "zxcvbnm"];
+const statusRank: Record<LetterStatus, number> = {
+  empty: 0,
+  absent: 1,
+  present: 2,
+  correct: 3,
+};
 
 function getStatuses(response: ApiResponse): LetterStatus[] {
   if (response.was_correct) {
@@ -52,6 +59,19 @@ function getCellClass(status: LetterStatus) {
       return "border-secondary/25 bg-secondary/20 text-secondary";
     default:
       return "border-secondary/25 bg-background text-foreground";
+  }
+}
+
+function getKeyClass(status: LetterStatus) {
+  switch (status) {
+    case "correct":
+      return "border-accent bg-accent text-foreground";
+    case "present":
+      return "border-[#d6a84f] bg-[#d6a84f] text-background";
+    case "absent":
+      return "border-secondary/25 bg-secondary/20 text-secondary";
+    default:
+      return "border-secondary/25 bg-background text-foreground hover:border-accent/70";
   }
 }
 
@@ -117,6 +137,28 @@ export function WordleGame() {
 
     return [...committedRows, ...activeRow, ...fillerRows];
   }, [guess, isComplete, rows]);
+
+  const keyboardStatuses = useMemo(() => {
+    const statuses: Record<string, LetterStatus> = {};
+
+    rows.forEach((row) => {
+      row.guess.split("").forEach((letter, index) => {
+        const currentStatus = statuses[letter] || "empty";
+        const nextStatus = row.statuses[index] || "empty";
+
+        if (statusRank[nextStatus] > statusRank[currentStatus]) {
+          statuses[letter] = nextStatus;
+        }
+      });
+    });
+
+    return statuses;
+  }, [rows]);
+
+  function addLetter(letter: string) {
+    if (isSubmitting || isComplete || guess.length >= wordLength) return;
+    setGuess((currentGuess) => `${currentGuess}${letter}`.slice(0, wordLength));
+  }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -198,7 +240,7 @@ export function WordleGame() {
     <div className="border border-secondary/25 bg-surface p-4 sm:p-5">
       <Toaster ref={toasterRef} defaultPosition="bottom-right" />
 
-      <div className="mb-5 flex flex-col gap-2 border-b border-secondary/25 pb-5 sm:flex-row sm:items-end sm:justify-between">
+      <div className="mb-4 flex flex-col gap-2 border-b border-secondary/25 pb-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="font-display text-xs uppercase tracking-[0.24em] text-accent">
             Daily Wordle
@@ -212,9 +254,9 @@ export function WordleGame() {
         </p>
       </div>
 
-      <div className="mx-auto grid max-w-[270px] gap-1.5">
+      <div className="mx-auto grid max-w-[240px] gap-1">
         {boardRows.map((row, rowIndex) => (
-          <div key={rowIndex} className="grid grid-cols-5 gap-1.5">
+          <div key={rowIndex} className="grid grid-cols-5 gap-1">
             {row.letters.map((letter, letterIndex) => (
               <div
                 key={`${rowIndex}-${letterIndex}`}
@@ -229,7 +271,11 @@ export function WordleGame() {
         ))}
       </div>
 
-      <form onSubmit={handleSubmit} className="mx-auto mt-4 flex max-w-[270px] gap-3">
+      <form
+        id="wordle-guess-form"
+        onSubmit={handleSubmit}
+        className="mx-auto mt-3 flex max-w-[270px] gap-3"
+      >
         <input
           value={guess}
           onChange={(event) => {
@@ -253,7 +299,42 @@ export function WordleGame() {
         </button>
       </form>
 
-      <p className="mt-4 min-h-6 text-sm text-secondary" role="status">
+      <div
+        className="mx-auto mt-4 grid max-w-[420px] gap-1.5"
+        aria-label="Guessed letters keyboard"
+      >
+        {keyboardRows.map((keyboardRow, rowIndex) => (
+          <div
+            key={keyboardRow}
+            className={`flex justify-center gap-1.5 ${
+              rowIndex === 1 ? "px-4" : rowIndex === 2 ? "px-10" : ""
+            }`}
+          >
+            {keyboardRow.split("").map((letter) => {
+              const status = keyboardStatuses[letter] || "empty";
+
+              return (
+                <button
+                  key={letter}
+                  type="button"
+                  onClick={() => addLetter(letter)}
+                  disabled={isSubmitting || isComplete}
+                  className={`flex h-9 min-w-8 flex-1 items-center justify-center border font-display text-sm uppercase transition-colors disabled:pointer-events-none disabled:opacity-50 sm:min-w-9 ${getKeyClass(
+                    status,
+                  )}`}
+                  aria-label={`${letter.toUpperCase()}${
+                    status === "empty" ? "" : ` ${status}`
+                  }`}
+                >
+                  {letter}
+                </button>
+              );
+            })}
+          </div>
+        ))}
+      </div>
+
+      <p className="mt-3 min-h-6 text-sm text-secondary" role="status">
         {message}
       </p>
     </div>

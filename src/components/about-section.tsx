@@ -2,7 +2,7 @@ import { ArrowDownToLine, ArrowUpRight } from "lucide-react";
 import { GraduationCountdown } from "@/components/graduation-countdown";
 
 const profile = [
-  ["Role", "Software engineer, CS student"],
+  ["Role", "CS student"],
   ["Based", "New York, NY"],
   ["Seeking", "2026 new-grad software role"],
 ];

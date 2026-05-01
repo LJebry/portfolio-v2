@@ -45,7 +45,7 @@ export function ContactCard({
           <p className="max-w-xl text-base leading-8 text-secondary lg:text-lg">
             {description}
           </p>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid max-w-3xl gap-4 sm:grid-cols-2">
             {contactInfo?.map((info) => (
               <ContactInfo key={info.label} {...info} />
             ))}
@@ -73,13 +73,16 @@ function ContactInfo({
   ...props
 }: ContactInfoProps) {
   return (
-    <div className={cn("flex items-center gap-3 py-3", className)} {...props}>
-      <div className="border border-secondary/25 bg-background p-3">
+    <div
+      className={cn("flex min-w-0 items-center gap-3 py-3", className)}
+      {...props}
+    >
+      <div className="shrink-0 border border-secondary/25 bg-background p-3">
         <Icon className="h-5 w-5 text-accent" />
       </div>
-      <div>
+      <div className="min-w-0">
         <p className="font-display text-sm uppercase text-foreground">{label}</p>
-        <p className="text-xs text-secondary">{value}</p>
+        <p className="break-words text-xs text-secondary">{value}</p>
       </div>
     </div>
   );

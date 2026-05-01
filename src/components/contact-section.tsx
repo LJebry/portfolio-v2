@@ -30,7 +30,7 @@ export function ContactSection() {
             icon: UserRoundIcon,
             label: "Focus",
             value: "Full Stack Developer roles",
-            className: "md:col-span-2 lg:col-span-1",
+            className: "sm:col-span-2 xl:col-span-1",
           },
         ]}
       >
