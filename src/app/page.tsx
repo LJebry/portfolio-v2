@@ -13,7 +13,14 @@ export default function Home() {
 
         <footer className="flex flex-col gap-3 border-t border-secondary/35 pt-5 text-sm text-secondary sm:flex-row sm:items-center sm:justify-between">
           <p>Based in the United States</p>
-          <p>Next.js App Router + Tailwind</p>
+          <a
+            href="https://www.buymeacoffee.com/jerry.robayo"
+            target="_blank"
+            rel="noreferrer"
+            className="transition-colors hover:text-accent"
+          >
+            You can support my work by buying me a coffee :)
+          </a>
         </footer>
       </section>
     </main>
